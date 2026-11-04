@@ -5,7 +5,6 @@ const app = express();
 
 app.use(express.json());
 app.post('/oportunidades', aportunidadeController.criar);
-app.get('/oportunidades', (req, res) => res.status(201).json({ status: "Back-end da CUFA funcionando!", codigo: 201 }));
 
 const porta = 3000;
 app.listen(porta, () => {
