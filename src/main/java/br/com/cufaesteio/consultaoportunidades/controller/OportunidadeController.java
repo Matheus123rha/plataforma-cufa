@@ -1,8 +1,10 @@
+
 package br.com.cufaesteio.consultaoportunidades.controller;
 
 import br.com.cufaesteio.consultaoportunidades.entity.Oportunidade;
 import br.com.cufaesteio.consultaoportunidades.repository.OportunidadeRepository;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,5 +33,14 @@ public class OportunidadeController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-}
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> excluir(@PathVariable Long id) {
+        if (!oportunidadeRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        oportunidadeRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+}
